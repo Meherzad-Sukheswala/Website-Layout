@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Design Preview - 20 Styles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            transition: all 0.5s ease;
+        }
+
+        /* Style Switcher */
+        .style-switcher {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+            padding: 1rem 2rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .switcher-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .switcher-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+
+        .style-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .style-section-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .style-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .style-btn {
+            padding: 0.4rem 0.9rem;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .style-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .style-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Main Content */
+        .preview-content {
+            margin-top: 220px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 220px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #4b5563;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        /* Hero Base */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .hero-center-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            z-index: 2;
+            color: white;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero-name {
+            font-size: 4rem;
+            font-weight: 700;
+            margin: 0 0 1.5rem 0;
+            line-height: 1.2;
+            color: white;
+        }
+
+        .hero-tagline {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1f2937;
+        }
+
+        /* STYLE 11: Animated Gradient Wave */
+        @keyframes gradientWave {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body.style-11 .hero {
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+            background-size: 400% 400%;
+            animation: gradientWave 15s ease infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        body.style-11 .hero-name {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* STYLE 12: Dark Mode Professional */
+        body.style-12 {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        body.style-12 .hero {
+            background: #0f172a;
+        }
+
+        body.style-12 .hero-name {
+            background: linear-gradient(135deg, #00f5ff 0%, #667eea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 245, 255, 0.3);
+        }
+
+        body.style-12 .btn-primary {
+            background: linear-gradient(135deg, #00f5ff 0%, #667eea 100%);
+            color: white;
+        }
+
+        body.style-12 .navbar {
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        body.style-12 section {
+            background: #1e293b;
+        }
+
+        body.style-12 .section-title {
+            color: #00f5ff;
+        }
+
+        /* STYLE 13: Minimalist Japanese Zen */
+        body.style-13 .hero {
+            background: #fafafa;
+        }
+
+        body.style-13 .hero-center-content {
+            color: #1f2937;
+        }
+
+        body.style-13 .hero-name {
+            color: #1f2937;
+            font-weight: 300;
+            letter-spacing: 8px;
+        }
+
+        body.style-13 .hero-subtitle,
+        body.style-13 .hero-tagline,
+        body.style-13 .hero-description {
+            color: #6b7280;
+        }
+
+        body.style-13 .btn-primary {
+            background: #1f2937;
+            color: white;
+            border-radius: 0;
+        }
+
+        body.style-13 .btn-secondary {
+            border: 2px solid #1f2937;
+            color: #1f2937;
+            border-radius: 0;
+        }
+
+        body.style-13 section {
+            background: white;
+        }
+
+        /* STYLE 14: Portfolio Magazine */
+        body.style-14 .hero {
+            display: block;
+            padding: 0;
+            background: white;
+        }
+
+        body.style-14 .hero-center-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            text-align: left;
+            color: #1f2937;
+            padding: 6rem 4rem;
+        }
+
+        body.style-14 .hero-name {
+            color: #1f2937;
+            font-size: 5rem;
+            line-height: 1;
+        }
+
+        body.style-14 .hero-subtitle,
+        body.style-14 .hero-tagline,
+        body.style-14 .hero-description {
+            color: #4b5563;
+        }
+
+        body.style-14 .hero-buttons {
+            justify-content: flex-start;
+        }
+
+        body.style-14 .btn-primary {
+            background: #1f2937;
+            color: white;
+        }
+
+        body.style-14 .btn-secondary {
+            border: 2px solid #1f2937;
+            color: #1f2937;
+        }
+
+        /* STYLE 15: Terminal/Command Line */
+        body.style-15 {
+            font-family: 'Space Mono', monospace;
+            background: #000;
+            color: #00ff00;
+        }
+
+        body.style-15 .hero {
+            background: #000;
+        }
+
+        body.style-15 .hero-name {
+            color: #00ff00;
+            font-family: 'Space Mono', monospace;
+        }
+
+        body.style-15 .hero-name::before {
+            content: '$ ';
+            color: #00ff00;
+        }
+
+        body.style-15 .hero-subtitle::before,
+        body.style-15 .hero-tagline::before {
+            content: '> ';
+        }
+
+        body.style-15 .hero-subtitle,
+        body.style-15 .hero-tagline,
+        body.style-15 .hero-description {
+            color: #00ff00;
+        }
+
+        body.style-15 .navbar {
+            background: rgba(0, 0, 0, 0.95);
+            border-bottom: 1px solid #00ff00;
+        }
+
+        body.style-15 .nav-link {
+            color: #00ff00;
+        }
+
+        body.style-15 section {
+            background: #0a0a0a;
+        }
+
+        body.style-15 .section-title {
+            color: #00ff00;
+        }
+
+        body.style-15 .section-title::before {
+            content: '// ';
+        }
+
+        /* STYLE 16: Neumorphism */
+        body.style-16 .hero {
+            background: #e0e5ec;
+        }
+
+        body.style-16 .hero-center-content {
+            background: #e0e5ec;
+            padding: 4rem;
+            border-radius: 30px;
+            box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+            color: #1f2937;
+        }
+
+        body.style-16 .hero-name {
+            color: #667eea;
+        }
+
+        body.style-16 .hero-subtitle,
+        body.style-16 .hero-tagline,
+        body.style-16 .hero-description {
+            color: #4b5563;
+        }
+
+        body.style-16 .btn {
+            box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
+            border: none;
+        }
+
+        body.style-16 .btn-primary {
+            background: #e0e5ec;
+            color: #667eea;
+        }
+
+        body.style-16 section {
+            background: #e0e5ec;
+        }
+
+        /* STYLE 17: Brutalist Bold */
+        body.style-17 .hero {
+            background: #ff0000;
+        }
+
+        body.style-17 .hero-name {
+            font-size: 6rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -4px;
+            color: #000;
+            text-shadow: 4px 4px 0 #fff, 8px 8px 0 #ffff00;
+        }
+
+        body.style-17 .hero-subtitle,
+        body.style-17 .hero-tagline,
+        body.style-17 .hero-description {
+            color: #000;
+            font-weight: 900;
+        }
+
+        body.style-17 .btn {
+            border-radius: 0;
+            border: 4px solid #000;
+            text-transform: uppercase;
+        }
+
+        body.style-17 .btn-primary {
+            background: #ffff00;
+            color: #000;
+        }
+
+        body.style-17 section:nth-child(even) {
+            background: #ffff00;
+        }
+
+        body.style-17 section:nth-child(odd) {
+            background: #00ff00;
+        }
+
+        /* STYLE 18: Parallax Layers */
+        body.style-18 .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            perspective: 1000px;
+        }
+
+        @keyframes parallaxFloat1 {
+            0%, 100% { transform: translateZ(50px) translateY(0px); }
+            50% { transform: translateZ(50px) translateY(-30px); }
+        }
+
+        @keyframes parallaxFloat2 {
+            0%, 100% { transform: translateZ(100px) translateY(0px); }
+            50% { transform: translateZ(100px) translateY(-20px); }
+        }
+
+        body.style-18 .hero-subtitle {
+            animation: parallaxFloat1 4s ease-in-out infinite;
+        }
+
+        body.style-18 .hero-name {
+            animation: parallaxFloat2 3s ease-in-out infinite;
+        }
+
+        body.style-18 .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1%, transparent 1%);
+            background-size: 50px 50px;
+            animation: parallaxFloat1 5s ease-in-out infinite;
+        }
+
+        /* STYLE 19: Geometric Shapes */
+        body.style-19 .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            position: relative;
+        }
+
+        body.style-19 .hero::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(45deg);
+            border-radius: 20px;
+        }
+
+        body.style-19 .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 20%;
+            right: 15%;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        body.style-19 .hero-name {
+            position: relative;
+        }
+
+        body.style-19 .hero-name::before {
+            content: '◆';
+            position: absolute;
+            left: -60px;
+            color: rgba(255, 255, 255, 0.3);
+            animation: rotate 4s linear infinite;
+        }
+
+        /* STYLE 20: Timeline Vertical */
+        body.style-20 .hero {
+            display: block;
+            min-height: auto;
+            background: white;
+            padding: 4rem 2rem;
+        }
+
+        body.style-20 .hero-center-content {
+            max-width: 600px;
+            text-align: left;
+            color: #1f2937;
+            position: relative;
+            padding-left: 4rem;
+        }
+
+        body.style-20 .hero-center-content::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #667eea;
+        }
+
+        body.style-20 .hero-subtitle,
+        body.style-20 .hero-name,
+        body.style-20 .hero-tagline,
+        body.style-20 .hero-description,
+        body.style-20 .hero-buttons {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        body.style-20 .hero-subtitle::before,
+        body.style-20 .hero-name::before,
+        body.style-20 .hero-tagline::before,
+        body.style-20 .hero-description::before,
+        body.style-20 .hero-buttons::before {
+            content: '';
+            position: absolute;
+            left: -3.5rem;
+            top: 10px;
+            width: 16px;
+            height: 16px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        body.style-20 .hero-name {
+            color: #667eea;
+            font-size: 3rem;
+        }
+
+        body.style-20 .hero-subtitle,
+        body.style-20 .hero-tagline,
+        body.style-20 .hero-description {
+            color: #4b5563;
+        }
+
+        body.style-20 .hero-buttons {
+            justify-content: flex-start;
+        }
+
+        body.style-20 .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        body.style-20 .btn-secondary {
+            border: 2px solid #667eea;
+            color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .hero-name {
+                font-size: 2.5rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="style-11">
+    <div class="style-switcher">
+        <div class="switcher-content">
+            <div class="switcher-title">🎨 20 Portfolio Styles - Click to Preview!</div>
+            
+            <div class="style-sections">
+                <div>
+                    <div class="style-section-title">Original Styles:</div>
+                    <div class="style-buttons">
+                        <button class="style-btn" onclick="changeStyle('alternating', this)">Alternating</button>
+                        <button class="style-btn" onclick="changeStyle('subtle-accents', this)">Subtle Accents</button>
+                        <button class="style-btn" onclick="changeStyle('full-purple', this)">Full Purple</button>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="style-section-title">Layout Variations:</div>
+                    <div class="style-buttons">
+                        <button class="style-btn" onclick="changeStyle('layout-5', this)">Split</button>
+                        <button class="style-btn" onclick="changeStyle('layout-6', this)">Top Aligned</button>
+                        <button class="style-btn" onclick="changeStyle('layout-7', this)">Glass Card</button>
+                        <button class="style-btn" onclick="changeStyle('layout-8', this)">Grid</button>
+                        <button class="style-btn" onclick="changeStyle('layout-9', this)">Big Type</button>
+                        <button class="style-btn" onclick="changeStyle('layout-10', this)">Bento</button>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="style-section-title">NEW Creative Styles:</div>
+                    <div class="style-buttons">
+                        <button class="style-btn active" onclick="changeStyle('style-11', this)">Animated Wave</button>
+                        <button class="style-btn" onclick="changeStyle('style-12', this)">Dark Neon</button>
+                        <button class="style-btn" onclick="changeStyle('style-13', this)">Zen Minimal</button>
+                        <button class="style-btn" onclick="changeStyle('style-14', this)">Magazine</button>
+                        <button class="style-btn" onclick="changeStyle('style-15', this)">Terminal</button>
+                        <button class="style-btn" onclick="changeStyle('style-16', this)">Neumorphism</button>
+                        <button class="style-btn" onclick="changeStyle('style-17', this)">Brutalist</button>
+                        <button class="style-btn" onclick="changeStyle('style-18', this)">Parallax</button>
+                        <button class="style-btn" onclick="changeStyle('style-19', this)">Geometric</button>
+                        <button class="style-btn" onclick="changeStyle('style-20', this)">Timeline</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="preview-content">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <span class="logo-icon">MS</span>
+                    <span class="logo-text">Portfolio</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#experience" class="nav-link">Experience</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <section id="home" class="hero">
+            <div class="hero-center-content">
+                <p class="hero-subtitle">MS Business Analytics Graduate from Northeastern University</p>
+                <h1 class="hero-name">Meherzad Sukheswala</h1>
+                <p class="hero-tagline">Turning data into decisions, insights into impact.</p>
+                <p class="hero-description">Driving business growth through analytics, visualization, and strategic problem solving.</p>
+                
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary">Explore My Work</a>
+                    <a href="#" class="btn btn-secondary">Download Resume</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <p style="text-align: center;">Business Analytics graduate specializing in data-driven insights.</p>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="container">
+                <h2 class="section-title">Experience</h2>
+                <p style="text-align: center;">Safety Kleen | AnalyticsAI | Godrej Interio</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function changeStyle(styleClass, button) {
+            document.body.className = '';
+            document.body.classList.add(styleClass);
+            
+            document.querySelectorAll('.style-btn').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
+</body>
+</html>
